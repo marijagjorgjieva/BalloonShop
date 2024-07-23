@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Balloon Order page - Welcome and choose a Balloon</title>
+  <link rel="stylesheet"  th:href="@{/css/styles.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}">
+
+</head>
+
+<body>
+<header>
+  <h1>User Orders :D </h1>
+</header>
+<main>
+  <table>
+    <tr>
+      <th colspan="2">
+        Your Order Status
+      </th>
+    </tr>
+    <tr>
+      <th>Balloon color</th>
+      <th>Balloon size </th>
+      <th>Client name</th>
+      <th>Date and timer</th>
+    </tr>
+    <tr th:each="b : ${orders}">
+      <td th:text="${b.getBalloonColor()}"</td>
+      <td th:text="${b.getBalloonSize()}"></td>
+      <td th:text="${b.getUsername()}"></td>
+      <td th:text="${#temporals.format(b.getDateCreated(), 'dd-MM-yyyy HH:mm:ss')}"></td>
+    </tr>
+  </table>
+  <div>
+    <form th:method="post" th:action="@{'/balloons/orders/withdate'}">
+      <label for="from">Filter from this date:</label>
+      <input type="datetime-local" id="from" name="from">
+      <label for="to">Filter to this date:</label>
+      <input type="datetime-local" name="to" id="to">
+
+      <button type="submit" >Филтрирај</button>
+    </form>
+  </div>
+  <div>
+    <form th:method="post" th:action="@{'/balloons/orders/namecontains'}">
+      <label for="from">Filter balloon size:</label>
+      <label for="namec">Add text:</label>
+      <input type="text" name="textInName" id="namec">
+
+      <button type="submit" >Филтрирај</button>
+    </form>
+  </div>
+
+  <div>
+    <form th:method="post" th:action="@{'/balloons/orders/descriptioncontains'}">
+
+      <label for="t">Filter by balloon name</label>
+      <input type="text" name="textInDescription" id="t">
+
+      <button type="submit" >Филтрирај</button>
+    </form>
+  </div>
+
+
+  <div>
+    <a th:href="@{'/logout'}">Log out</a>
+  </div>
+  <div>
+    <a th:href="@{'/balloons'}">Home</a>
+  </div>
+</main>
+</body>
+</html>

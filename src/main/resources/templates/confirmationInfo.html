@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>WP lab - Confirmation Info</title>
+  <link rel="stylesheet"  th:href="@{/css/styles.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}">
+
+
+</head>
+<body>
+<section>
+  <header>
+    <h1>Balloon Order page - Order confirmation </h1>
+  </header>
+  <table>
+    <tr>
+      <th colspan="2">
+        Your Order Status
+      </th>
+    </tr>
+    <tr>
+      <td><b>Client Name </b></td>
+      <td th:text="${name}"></td>
+    </tr>
+    <tr>
+      <td><b>Client Address </b></td>
+      <td th:text="${delivery}"></td>
+    </tr>
+    <tr>
+      <td><b>Client IP Address</b></td>
+      <td th:text="${ipaddr}"></td>
+    </tr>
+    <tr>
+      <td><b>Client Browser</b></td>
+      <td th:text="${browser}"></td>
+    </tr>
+    <tr>
+      <td><b>Balloon Color </b></td>
+      <td th:text="${colour}"></td>
+    </tr>
+    <tr>
+      <td><b>Balloon Size </b></td>
+      <td th:text="${size}"></td>
+    </tr>
+    <tr>
+      <td><b>Date of order</b></td>
+      <td th:text="${cart}"></td>
+    </tr>
+  </table>
+  <div>
+    <a href="/bye">Log out</a>
+  </div>
+  <div>
+    <a href="/balloons/orders">Order info</a>
+  </div>
+
+</section>
+</body>
+</html>

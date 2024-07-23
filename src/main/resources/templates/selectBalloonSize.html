@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Balloon Size</title>
+    <link rel="stylesheet"  th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}">
+
+</head>
+<body>
+<header>
+    <h1>Balloon Order page - Select Balloon Size </h1>
+</header>
+<section>
+    <h2>Choose balloon size:</h2>
+    <form th:action="@{/BalloonOrder.do}" th:method="POST">
+      <input  type="radio" name="size" id="Small" value="Small">
+        <label for="Small">Small</label><br/>
+      <input type="radio" name="size" id="Medium"  value="Medium">
+        <label for="Medium">Medium</label><br/>
+      <input type="radio" name="size" id="Big" value="Big">
+        <label for="Big">Big</label><br/>
+      <input type="radio" name="size" id="ExtraBig" value="Extra Big">
+        <label for="ExtraBig">Extra Big</label><br/>
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+<aside>
+    <table>
+        <tr>
+            <th colspan="2">
+                Your Order Status
+            </th>
+        </tr>
+        <tr>
+            <td><b>Balloon Colour </b></td>
+            <td th:text="${colour}"></td>
+        </tr>
+    </table>
+</aside>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add a balloon</title>
+    <link rel="stylesheet"  th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}">
+</head>
+<body>
+<h2>Add another balloon:</h2>
+<form th:method="POST" th:action="@{'/balloons/add'}" th:if="${BalloonID} == null" >
+    <label for="name">Balloon Name:</label>
+    <input type="text" id="name" name="name"> <br/>
+    <label for="desc">Balloon Description:</label>
+    <input type="text" id="desc" name="desc"> <br/>
+    <input type="hidden" name="edit" value=0>
+
+    <label> Manufacturer:
+        <select name="manufacturer" id="man">
+            <option
+                    th:each="b : ${man}"
+                    th:value="${b.getId}"
+                    th:text="${b.getName()}">
+            </option>
+        </select>
+    </label>
+
+
+    <input id="submit" type="submit" class="button button1" value="Submit">
+</form>
+
+<form th:if="${BalloonID} != null">
+    <label for="id1">Balloon id:</label>
+    <input type="text" id="id1" name="id" disabled th:value="${BalloonID}"><br/>
+    <label for="name2">Balloon Name: </label>
+    <input type="text" id="name2" name="name" disabled th:value="${BalloonName}"> <br/>
+    <label for="desc3">Balloon Description:</label>
+    <input type="text" id="desc3" name="desc" disabled th:value="${BalloonDesc}"> <br/>
+    <label for="man4">Balloon Description:</label>
+    <input type="text" id="man4" name="desc" disabled th:value="${BalloonMan}"> <br/>
+</form>
+
+<form th:method="POST" th:action="@{'/balloons/add'}" th:if="${BalloonID} != null" >
+    <label for="id_1">Balloon id:</label>
+    <input type="text" id="id_1" name="id" readonly th:value="${BalloonID}"><br/>
+    <label for="name_1">Balloon Name: </label>
+    <input type="text" id="name_1" name="name" th:value="${BalloonName}"> <br/>
+    <label for="desc_1">Balloon Description:</label>
+    <input type="text" id="desc_1" name="desc" th:value="${BalloonDesc}"> <br/>
+    <input type="hidden"  name="edit" value=1>
+
+    <label> Manufacturer:
+        <select name="manufacturer" id="man_1">
+            <option
+                    th:each="b : ${man}"
+                    th:value="${b.getId}"
+                    th:text="${b.getName()}">
+            </option>
+        </select>
+    </label>
+
+
+    <input id="submit_1" type="submit" class="button button1" value="Submit">
+</form>
+</body>
+</html>

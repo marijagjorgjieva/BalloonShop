@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}">
+
+
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+</header>
+<main>
+    <h1 th:if="${error}!=null">NE POSTOI TAKVOV USERNAM ILI GRESEN PASSWORD!</h1>
+    <h2>Choose balloon color:</h2>
+
+    <table>
+        <tr>
+            <th>Baloon id</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Manufacturer</th>
+            <th>Choose</th>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <th>Delete</th>
+                <th>Edit</th>
+            </th:block>
+
+
+        </tr>
+        <tr th:each="b : ${balloons}" class="product">
+            <td th:text="${b.getId()}"
+            </td>
+            <td th:text="${b.getName()}"></td>
+            <td th:text="${b.getDescription()}"></td>
+            <td th:text="${b.getManufacturer()}"></td>
+            <td>
+                <form th:method="POST" th:action="@{'/balloons/choose/{id}' (id=${b.getId()})}">
+                    <input class="button button1" type="submit" value="choose">
+                </form>
+            </td>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <td>
+                    <form th:method="DELETE" th:action="@{'/balloons/delete/{id}' (id=${b.getId()})}">
+                        <input class="button button1 delete-product" type="submit" value="delete" >
+                    </form>
+                </td>
+                <td>
+                    <form th:method="GET" th:action="@{' /balloons/edit-form/{id}' (id=${b.getId()})}">
+                        <input class="button button1 edit-product" type="submit" value="edit" >
+                    </form>
+                </td>
+            </th:block>
+        </tr>
+    </table>
+
+    <br>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <form th:method="GET" th:action="@{'/balloons/add-form'}">
+            <input class="button button1 add-product" type="submit" value="Add Balloon" >
+        </form>
+    </th:block>
+
+</main>
+</body>
+</html>
